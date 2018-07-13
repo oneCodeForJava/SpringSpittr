@@ -24,6 +24,7 @@ public class Spitter {
 	
 	public Spitter() {
 	}
+	
 	public Spitter(String username, String password, String firstName, String lastName) {
 		this(null, firstName, lastName, username, password);
 	}
