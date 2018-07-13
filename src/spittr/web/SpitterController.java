@@ -25,7 +25,8 @@ public class SpitterController {
 	}
 	
 	@RequestMapping(value="/register", method=RequestMethod.GET)
-	public String showSpittle(){
+	public String showSpittle(Model model){
+		model.addAttribute(new Spitter());
 		return "registerForm";
 	}
 	
