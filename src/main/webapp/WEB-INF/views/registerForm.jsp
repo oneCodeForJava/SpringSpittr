@@ -15,6 +15,7 @@
 		Last Name: <input type="text" name="lastName" /><br/>
 		UserName: <input type="text" name="username" /><br/>
 		Password: <input type="password" name="password" /><br/>
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 		<input type="submit" value="Register"> 
 	</form>
 </body>

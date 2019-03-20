@@ -32,11 +32,11 @@ public class SpitterController {
 		return "redirect:/spitter/"+spitter.getUsername();
 	}
 	
-	@RequestMapping(value="{username}", method=RequestMethod.GET)
+/*	@RequestMapping(value="{username}", method=RequestMethod.GET)
 	public String showSpitterProfile(@PathVariable String username, Model model){
 		Spitter spitter = spittleRepository.findByUsername(username);
 		model.addAttribute(spitter);
 		return "profile";
-	}
+	}*/
 
 }

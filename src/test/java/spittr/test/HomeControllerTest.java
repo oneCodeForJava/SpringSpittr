@@ -1,5 +1,4 @@
-package spittr.web;
-
+package spittr.test;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -16,6 +15,9 @@ import org.springframework.web.servlet.view.InternalResourceView;
 import spittr.Spitter;
 import spittr.Spittle;
 import spittr.data.SpittleRepository;
+import spittr.web.HomeController;
+import spittr.web.SpitterController;
+import spittr.web.SpittleController;
 
 public class HomeControllerTest {
 	

@@ -10,11 +10,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Configuration
-@EnableWebMvc//ÆôÓÃmvc×¢½âÇı¶¯
+@EnableWebMvc
 @ComponentScan("spittr.web")
 public class WebConfig extends WebMvcConfigurerAdapter{
 	
-	@Bean//ÅäÖÃÊÓÍ¼½âÎöÆ÷
+	@Bean()//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public ViewResolver viewResolver(){
 		InternalResourceViewResolver resolver = new InternalResourceViewResolver();
 		resolver.setPrefix("/WEB-INF/views/");
@@ -23,7 +23,7 @@ public class WebConfig extends WebMvcConfigurerAdapter{
 		return resolver;
 	}
 	
-	@Override//ÅäÖÃ¾²Ì¬×ÊÔ´µÄ´¦Àí
+	@Override//ï¿½ï¿½ï¿½Ã¾ï¿½Ì¬ï¿½ï¿½Ô´ï¿½Ä´ï¿½ï¿½ï¿½
 	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
 		configurer.enable();
 	}
