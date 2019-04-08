@@ -1,13 +1,15 @@
-package spittr.data;
+package spittr.service;
 
 import java.util.List;
 
-import spittr.Spitter;
-import spittr.Spittle;
+import spittr.entity.Spitter;
+import spittr.entity.Spittle;
 
-public interface SpittleRepository {
+public interface SpitterService {
 	List<Spittle> findSpittles(long max, int count); 
 	Spittle findOne(long spittleId);
-	Spitter save(Spitter spitter);
+	
+
+	void save(Spitter spitter);
 	Spitter findByUsername(String username);
 }

@@ -12,9 +12,9 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.servlet.view.InternalResourceView;
 
-import spittr.Spitter;
-import spittr.Spittle;
-import spittr.data.SpittleRepository;
+import spittr.dao.SpitterRepository;
+import spittr.entity.Spitter;
+import spittr.entity.Spittle;
 import spittr.web.HomeController;
 import spittr.web.SpitterController;
 import spittr.web.SpittleController;
@@ -33,7 +33,7 @@ public class HomeControllerTest {
 	@Test
 	public void shouldShowRecentSpittles() throws Exception{
 		List<Spittle> expectedSpittles = createSpittleList(20);
-		SpittleRepository mockRepository = Mockito.mock(SpittleRepository.class);
+		SpitterRepository mockRepository = Mockito.mock(SpitterRepository.class);
 		Mockito.when(mockRepository.findSpittles(Long.MAX_VALUE, 20)).thenReturn(expectedSpittles);
 		SpittleController controller = new SpittleController(mockRepository);
 		MockMvc mockMvc = MockMvcBuilders.standaloneSetup(controller)
@@ -47,7 +47,7 @@ public class HomeControllerTest {
 	@Test
 	public void shouldShowPagedSpittles() throws Exception{
 		List<Spittle> expectedSpittles = createSpittleList(50);
-		SpittleRepository mockRepository = Mockito.mock(SpittleRepository.class);
+		SpitterRepository mockRepository = Mockito.mock(SpitterRepository.class);
 		Mockito.when(mockRepository.findSpittles(238900, 50)).thenReturn(expectedSpittles);
 		SpittleController controller = new SpittleController(mockRepository);
 		MockMvc mockMvc = MockMvcBuilders.standaloneSetup(controller)
@@ -61,7 +61,7 @@ public class HomeControllerTest {
 	@Test
 	public void testSpittle() throws Exception{
 		Spittle expectedSpittle = new Spittle("Hello", new Date());
-		SpittleRepository mockRepository = Mockito.mock(SpittleRepository.class);
+		SpitterRepository mockRepository = Mockito.mock(SpitterRepository.class);
 		Mockito.when(mockRepository.findOne(12345)).thenReturn(expectedSpittle);
 		SpittleController controller = new SpittleController(mockRepository);
 		MockMvc mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
@@ -73,7 +73,7 @@ public class HomeControllerTest {
 	
 	@Test
 	public void shouldShowRegistration() throws Exception{
-		SpittleRepository mockRepository = Mockito.mock(SpittleRepository.class);
+		SpitterRepository mockRepository = Mockito.mock(SpitterRepository.class);
 		SpitterController controller = new SpitterController(mockRepository);
 		MockMvc mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
 		mockMvc.perform(MockMvcRequestBuilders.get("/spitter/register"))
@@ -83,7 +83,7 @@ public class HomeControllerTest {
 	
 	@Test
 	public void shouldProcessRegistration() throws Exception{
-		SpittleRepository mockRepository = Mockito.mock(SpittleRepository.class);
+		SpitterRepository mockRepository = Mockito.mock(SpitterRepository.class);
 		Spitter unsaved = new Spitter("jbauer", "24hours", "Jack", "Bauer");
 		Spitter saved = new Spitter(24L, "jbauer", "24hours", "Jack", "Bauer");
 		Mockito.when(mockRepository.save(unsaved)).thenReturn(saved);

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:c="http://www.springframework.org/schema/c"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/util 
+        http://www.springframework.org/schema/util/spring-util.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/data/jpa
+        http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
+        ">
+    <!-- 声明式事务配置 -->
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+        	<tx:method name="get*" propagation="NOT_SUPPORTED" read-only="true" />
+            <tx:method name="count*" propagation="NOT_SUPPORTED" read-only="true" />
+            <tx:method name="find*" propagation="NOT_SUPPORTED" read-only="true" />
+            <tx:method name="query*" propagation="NOT_SUPPORTED" read-only="true" />
+            <tx:method name="*" propagation="REQUIRED" rollback-for="Exception" />
+        </tx:attributes>
+    </tx:advice>
+    
+    <!-- 只对业务逻辑层实施事务  -->
+    <aop:config>
+        <aop:pointcut id="txPointcut" expression="execution(* spittr.service.impl.*.*(..))" />
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="txPointcut"/>
+    </aop:config>
+    
+    <!-- 配置session工厂 -->
+<!-- 	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+ 
+		<property name="dataSource" ref="dataSource" /> session所依赖的数据源
+ 
+		以下是另一种方式
+		<property name="packagesToScan">
+		定义了此，但双没有任何实际的类，会抛出异常：
+		java.lang.ClassNotFoundException: org.hibernate.cfg.Configuration
+			<list>
+				<value>spittr.entity</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="dialect">org.hibernate.dialect.Oracle10gDialect</prop>
+				
+			</props>
+		</property>
+	</bean> -->
+ 
+	<!-- 配置Hibernate 的事物管理器 -->  
+<!--     <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">  
+        <property name="sessionFactory" ref="sessionFactory"></property>  
+    </bean> -->
+
+    <!-- 事务的传播特性 -->
+<!--     <aop:config>  
+        <aop:advisor pointcut="execution(* spittr.dao.*.*(..))" advice-ref="txAdvice" />  
+    </aop:config>
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="save*" propagation="REQUIRED" />
+            <tx:method name="add*" propagation="REQUIRED" />
+            <tx:method name="find*" read-only="true" propagation="REQUIRED" />
+            <tx:method name="get*" read-only="true" propagation="REQUIRED" />
+            <tx:method name="update*" propagation="REQUIRED" />
+            <tx:method name="delete*" propagation="REQUIRED" />
+            <tx:method name="del*" propagation="REQUIRED" />
+            <tx:method name="*"  read-only="true" />
+        </tx:attributes>
+    </tx:advice> -->
+   
+</beans>

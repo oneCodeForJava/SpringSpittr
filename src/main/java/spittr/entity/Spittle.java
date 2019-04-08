@@ -1,16 +1,34 @@
-package spittr;
+package spittr.entity;
 
 import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
+@Entity
+@Table(name="Spittle")
 public class Spittle {
-	private final Long id;
-	private final String message;
-	private final Date time;
+	@Id
+	private Long id;
+	@Column(name="message")
+	private String message;
+	@Column(name="time")
+	private Date time;
+	@Column(name="latitude")
 	private Double latitude;
+	@Column(name="longtitude")
 	private Double longitude;
+	
+	public Spittle(){
+	}
 	
 	public Spittle(String message, Date time){
 		this(message, time, null, null);

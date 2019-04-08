@@ -10,19 +10,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import spittr.Spittle;
-import spittr.data.SpittleRepository;
+import spittr.dao.SpitterRepository;
+import spittr.entity.Spittle;
 
 @Controller
 @RequestMapping("/spittles")
 public class SpittleController {
 
-	private SpittleRepository spittleRepository;
+	private SpitterRepository spittleRepository;
 	
 	private static final String MAX_LONG_AS_STRING = Long.MAX_VALUE+"";
 	
 	@Autowired
-	public SpittleController(SpittleRepository mockRepository) {
+	public SpittleController(SpitterRepository mockRepository) {
 		this.spittleRepository = mockRepository;
 	}
 	
